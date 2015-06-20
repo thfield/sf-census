@@ -27,19 +27,20 @@ function renderNeighborhoods(){
 
     var sfneighborhoods = topojson.feature(sf, sf.objects.SFFind_Neighborhoods);
 
-    svg.append("path")
-        .datum(sfneighborhoods)
-        .attr("d", path);
-
-    svg.selectAll(".neighborhood")
+    // svg.append("g")
+    //     .attr("class", "neighborhoods")
+    //   .append("path")
+    //     .datum(sfneighborhoods)
+    //     .attr("d", path);
+    svg.append("g")
+          .attr("class", "neighborhoods")
+        .selectAll(".neighborhood")
           .data(topojson.feature(sf, sf.objects.SFFind_Neighborhoods).features)
         .enter().append("path")
           .attr("class", "neighborhood")
           .on("mouseover", function(d) { return setTitle(d.properties.name); })
           //.attr("data-name", function(d) { return d.properties.name; })
           .attr("d", path)
-          .attr("fill", "#fff")
-          .attr("stroke", "#000")
           .append("svg:title")
           .text( function(d) { return d.properties.name; });
 
