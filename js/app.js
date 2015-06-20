@@ -28,17 +28,16 @@ function renderNeighborhoods(){
     var sfneighborhoods = topojson.feature(sf, sf.objects.SFFind_Neighborhoods);
 
     svg.append("g")
-          .attr("class", "neighborhoods")
-        .selectAll(".neighborhood")
-          .data(topojson.feature(sf, sf.objects.SFFind_Neighborhoods).features)
-        .enter().append('a').attr("xlink:href",function(d) { return d.properties.LINK; })
-          .append("path")
-          .attr("class", "neighborhood")
-          .on("mouseover", function(d) { return setTitle(d.properties.name); })
-          .attr("d", path)
-          .append("svg:title")
-          .text( function(d) { return d.properties.name; });
-
+        .attr("class", "neighborhoods")
+      .selectAll(".neighborhood")
+        .data(topojson.feature(sf, sf.objects.SFFind_Neighborhoods).features)
+      .enter().append('a').attr("xlink:href",function(d) { return d.properties.LINK || '#'; })
+        .append("path")
+        .attr("class", "neighborhood")
+        .on("mouseover", function(d) { return setTitle(d.properties.name); })
+        .attr("d", path)
+        .append("svg:title")
+        .text( function(d) { return d.properties.name; });
   });
 }
 
