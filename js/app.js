@@ -10,7 +10,6 @@ var tiler = d3.geo.tile()
 
 var projection = d3.geo.mercator()
     .center([-122.433701, 37.767683])
-    //.scale((1 << 20) / 2 / Math.PI)
     .scale(250000)
     .translate([width / 2, height / 2]);
 
@@ -18,8 +17,9 @@ var path = d3.geo.path()
     .projection(projection);
 
 svg
-    .call(renderTiles, "highroad")
-    .call(renderNeighborhoods);
+//    .call(renderTiles, "highroad")
+    .call(renderNeighborhoods)
+    ;
 
 function renderNeighborhoods(){
   d3.json("data/sf-neighborhoods.json", function(error, sf) {
@@ -27,19 +27,14 @@ function renderNeighborhoods(){
 
     var sfneighborhoods = topojson.feature(sf, sf.objects.SFFind_Neighborhoods);
 
-    // svg.append("g")
-    //     .attr("class", "neighborhoods")
-    //   .append("path")
-    //     .datum(sfneighborhoods)
-    //     .attr("d", path);
     svg.append("g")
           .attr("class", "neighborhoods")
         .selectAll(".neighborhood")
           .data(topojson.feature(sf, sf.objects.SFFind_Neighborhoods).features)
-        .enter().append("path")
+        .enter().append('a').attr("xlink:href",function(d) { return d.properties.LINK; })
+          .append("path")
           .attr("class", "neighborhood")
           .on("mouseover", function(d) { return setTitle(d.properties.name); })
-          //.attr("data-name", function(d) { return d.properties.name; })
           .attr("d", path)
           .append("svg:title")
           .text( function(d) { return d.properties.name; });
