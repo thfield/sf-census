@@ -2,6 +2,22 @@ body {
 	/* background: #000000; */
 }
 
-.neighborhood:hover {
-  fill: #000;
+path {
+  fill: none;
+  stroke: #000;
 }
+
+
+.major_road { stroke: #444; }
+.minor_road { stroke: #bbb; }
+.highway { stroke: #111; stroke-width: 1.5px; }
+
+
+.neighborhood {
+  fill: rgba(177, 168, 153, 0.5);
+  stroke: #38383a;
+}
+
+.neighborhood:hover {
+   fill: rgba(247, 91, 68, 0.5);
+ }
