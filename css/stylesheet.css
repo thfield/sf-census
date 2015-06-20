@@ -1,0 +1,28 @@
+body {
+	/* background: #000000; */
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.linechart {
+	height: 500px;
+	margin-bottom: 2em;
+}
+.sparkline {
+	margin-top: 1em;
+}
