@@ -5,7 +5,7 @@ var svg = d3.select("#map_container").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("data/sf.json", function(error, sf) {
+d3.json("data/sf-neighborhoods.json", function(error, sf) {
   if (error) return console.error(error);
 
   var sfneighborhoods = topojson.feature(sf, sf.objects.SFFind_Neighborhoods);
@@ -13,8 +13,7 @@ d3.json("data/sf.json", function(error, sf) {
   var projection = d3.geo.mercator()
       .center([-122.433701, 37.767683])
       .scale(250000)
-      .translate([width / 2, height / 2])
-      .precision(.1);
+      .translate([width / 2, height / 2]);
 
   var path = d3.geo.path()
       .projection(projection);
