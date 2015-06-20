@@ -17,8 +17,8 @@ var path = d3.geo.path()
     .projection(projection);
 
 svg
-//    .call(renderTiles, "highroad")
-    .call(renderNeighborhoods)
+    .call(renderTiles, "highroad") //comment to stop roads rendering
+    .call(renderNeighborhoods) //comment to stop neighborhoods rendering
     ;
 
 function renderNeighborhoods(){
@@ -31,8 +31,9 @@ function renderNeighborhoods(){
         .attr("class", "neighborhoods")
       .selectAll(".neighborhood")
         .data(topojson.feature(sf, sf.objects.SFFind_Neighborhoods).features)
-      .enter().append('a').attr("xlink:href",function(d) { return d.properties.LINK || '#'; })
-        .append("path")
+      .enter().append('a')
+        .attr("xlink:href",function(d) { return d.properties.LINK || '#'; }) //change property here to change link
+      .append("path")
         .attr("class", "neighborhood")
         .on("mouseover", function(d) { return setTitle(d.properties.name); })
         .attr("d", path)
