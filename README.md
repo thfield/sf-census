@@ -1,4 +1,5 @@
 # sf-map
+http://thfield.github.io/sf-map
 
 draws a map of san francisco with neighborhoods outlined and named.
 
