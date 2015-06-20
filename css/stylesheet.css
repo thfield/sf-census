@@ -21,3 +21,7 @@ path {
 .neighborhood:hover {
    fill: rgba(247, 91, 68, 0.5);
  }
+
+.hidden {
+  display: none;
+}

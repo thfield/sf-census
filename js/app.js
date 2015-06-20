@@ -65,3 +65,7 @@ function renderTiles(svg, type) {
 function setTitle(newTitle){
   d3.select("#selected-title").text(newTitle);
 }
+
+function handleClick(cb) {
+  d3.select('.' + cb.name).classed("hidden", !cb.checked);
+}
