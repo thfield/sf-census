@@ -27,9 +27,16 @@ d3.json("data/sf.json", function(error, sf) {
         .data(topojson.feature(sf, sf.objects.SFFind_Neighborhoods).features)
       .enter().append("path")
         .attr("class", "neighborhood")
-        .attr("data-name", function(d) { return d.properties.name; })
+        .on("mouseover", function(d) { return setTitle(d.properties.name); })
+        //.attr("data-name", function(d) { return d.properties.name; })
         .attr("d", path)
         .attr("fill", "#fff")
         .attr("stroke", "#000")
+        .append("svg:title")
+        .text( function(d) { return d.properties.name; });
 
 });
+
+function setTitle(newTitle){
+  d3.select("#selected-title").text(newTitle);
+}
