@@ -8,4 +8,4 @@ License: Open Data Commons Public Domain Dedication and License
 
 converted to topojson with http://www.mapshaper.org/
 
-drawn using d3.js with a lot of help from [let's make a map](http://bost.ocks.org/mike/map/)
+drawn using d3.js with a lot of help from [let's make a map](http://bost.ocks.org/mike/map/) and [vector tiles](http://bl.ocks.org/mbostock/5798874)
