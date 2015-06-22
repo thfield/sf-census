@@ -1,24 +1,35 @@
 (function() {
-  var width = 750,
-      height = 750;
+
+  var margin = {top: 10, left: 10, bottom: 10, right: 10}
+      , width = parseInt(d3.select('#map_container').style('width'))
+      , width = width - margin.left - margin.right
+      , mapRatio = 1
+      , height = width * mapRatio
+      , scaleMultiplier = 300
+      ;
 
   var svg = d3.select("#map_container").append("svg")
-      .attr("width", width)
-      .attr("height", height);
+      .attr("viewbox", "0 0 750 750")
+      .attr("preserveAspectRatio", "xMidYMid meet")
+      .classed("svg-content-responsive", true)
+      // .attr("width", width)
+      // .attr("height", height)
+      ;
 
   var tiler = d3.geo.tile()
       .size([width, height]);
 
   var projection = d3.geo.mercator()
       .center([-122.433701, 37.767683])
-      .scale(250000)
+      // .scale(250000)
+      .scale(width*scaleMultiplier)
       .translate([width / 2, height / 2]);
 
   var path = d3.geo.path()
       .projection(projection);
 
   svg
-      .call(renderTiles, "highroad") //comment to stop roads rendering
+      //.call(renderTiles, "highroad") //comment to stop roads rendering
       .call(renderNeighborhoods) //comment to stop neighborhoods rendering
       ;
 
@@ -42,6 +53,29 @@
           .text( function(d) { return d.properties.name; });
     });
   }
+
+  d3.select(window).on('resize', resize);
+
+  function resize() {
+    // adjust things when the window size changes
+    width = parseInt(d3.select('#map_container').style('width'));
+    width = width - margin.left - margin.right;
+    height = width * mapRatio;
+
+    // update projection
+    projection
+        .translate([width / 2, height / 2])
+        .scale(width*scaleMultiplier);
+
+    // resize the map container
+    svg
+        .style('width', width + 'px')
+        .style('height', height + 'px');
+
+    // resize the map
+    svg.select('.neighborhoods').attr('d', path);
+    svg.selectAll('.neighborhood').attr('d', path);
+}
 
   function renderTiles(svg, type) {
     svg.append("g")
