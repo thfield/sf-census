@@ -9,11 +9,8 @@
       ;
 
   var svg = d3.select("#map_container").append("svg")
-      .attr("viewbox", "0 0 750 750")
-      .attr("preserveAspectRatio", "xMidYMid meet")
-      .classed("svg-content-responsive", true)
-      // .attr("width", width)
-      // .attr("height", height)
+      .attr("height", height)
+      .attr("id","neighborhood-map")
       ;
 
   var tiler = d3.geo.tile()
@@ -21,7 +18,6 @@
 
   var projection = d3.geo.mercator()
       .center([-122.433701, 37.767683])
-      // .scale(250000)
       .scale(width*scaleMultiplier)
       .translate([width / 2, height / 2]);
 
@@ -29,9 +25,10 @@
       .projection(projection);
 
   svg
-      //.call(renderTiles, "highroad") //comment to stop roads rendering
-      .call(renderNeighborhoods) //comment to stop neighborhoods rendering
+      .call(renderTiles, "highroad") //remove to stop roads rendering
+      .call(renderNeighborhoods) //remove to stop neighborhoods rendering
       ;
+
 
   function renderNeighborhoods(){
     d3.json("data/sf-neighborhoods.json", function(error, sf) {
@@ -75,6 +72,10 @@
     // resize the map
     svg.select('.neighborhoods').attr('d', path);
     svg.selectAll('.neighborhood').attr('d', path);
+    svg.select('.highroad').attr('d', path);
+    svg.selectAll('.minor_road').attr('d', path);
+    svg.selectAll('.major_road').attr('d', path);
+    svg.selectAll('.highway').attr('d', path);
 }
 
   function renderTiles(svg, type) {
