@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/stylesheet.css">
   <script src="js/d3.min.js" charset="utf-8"></script>
   <script src="js/topojson.js" charset="utf-8"></script>
-  <script src="http://d3js.org/d3.geo.tile.v0.min.js"></script>
+  <script src="js/d3.geo.tile.v0.min.js"></script>
 </head>
 
 <body>
@@ -19,7 +19,24 @@
   <p>
     Streets <input type="checkbox" name="highroad" onclick='handleClick(this);' checked> <br>
     Neighborhoods  <input type="checkbox" name="neighborhoods" onclick='handleClick(this);' checked> <br>
+    Census Tract  <input type="checkbox" name="censustracts" onclick='handleClick(this);' checked> <br>
   </p>
+
+  <p>
+    <select name="select" id="select">
+        <option value="total_pop" selected>total population</option>
+        <option value="pop_male">total male population</option>
+        <option value="pop_female">total female population</option>
+        <option value="age">median age</option>
+        <option value="median_female_age">median female age</option>
+        <option value="median_male_age">median male age</option>
+      </select>
+  </p>
+
+
+
+
+
 
   <script src="js/app.js" charset="utf-8"></script>
 
@@ -32,6 +49,7 @@
   and http://bl.ocks.org/mbostock/5798874 <br>
   osm tiles from http://openstreetmap.us/~migurski/vector-datasource/<br>
   responsive map from http://eyeseast.github.io/visible-data/2013/08/26/responsive-d3/<br>
+  census data from http://uscensusbureau.github.io/citysdk<br>
 </body>
 
 </html>
