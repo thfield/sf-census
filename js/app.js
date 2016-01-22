@@ -36,6 +36,14 @@
       .call(renderCensusTract) //remove to stop neighborhoods rendering
       ;
 
+  var keymap = [],
+      censusData;
+
+    d3.json("data/age-sex.json", function(data) {
+        censusData = data
+        changeColorVar('B01001_002E')
+    })
+
 
   function renderNeighborhoods(){
     d3.json("data/sf-neighborhoods.json", function(error, sf) {
@@ -56,53 +64,53 @@
     });
   }
 
+
   function renderCensusTract(){
-    d3.json("data/censustopo.json", censusColor);
+    d3.json("data/tracts_topo.json", function(error, tract) {
+      if (error) return console.error(error);
+
+      svg.append("g")
+          .attr("class", "censustracts")
+        .selectAll(".censustract")
+          .data(topojson.feature(tract, tract.objects.sf).features)
+        .enter().append("path")
+          .attr("class", "censustract")
+          .attr("d", path)
+          .append("svg:title")
+    });
   }
-  var keymap = [],
-      censusData;
 
-  function censusColor(error, tract, opt) {
-    if (error) return console.error(error);
-    censusData = tract
-
-    var def_prop = 'B01001_001E'
-
-    tract.objects.census.geometries.forEach(function(el){
-      keymap.push(el.properties[def_prop])
-      colorMap.set(el.properties.TRACT , el.properties[def_prop])
-    })
+  function changeColorVar(demog){
+    console.log('color '+ demog);
+    keymap.length = 0
+    for (var tract in censusData) {
+      colorMap.set(tract, censusData[tract][demog])
+      keymap.push(censusData[tract][demog])
+    }
     quantize.domain(d3.extent(keymap))
+    var censustracts = svg.select(".censustracts").selectAll(".censustract")
+    censustracts
+      .attr("class", function(d){
+        return "censustract " + quantize(colorMap.get(d.id))
+      })
+      .on("mouseover", function(d) { return setTitle(colorMap.get(d.id)); })
+      .select("title")
+      .text( function(d) { return colorMap.get(d.id); });
 
-    svg.append("g")
-        .attr("class", "censustracts")
-      .selectAll(".censustract")
-        .data(topojson.feature(tract, tract.objects.census).features)
-      .enter().append("path")
-        .attr("class", function(d){
-          return "censustract " + quantize(colorMap.get(d.properties.TRACT))
-        })
-        .on("mouseover", function(d) { return setTitle(d.properties[def_prop]); })
-        .attr("d", path)
-        .append("svg:title")
-        .text( function(d) { return d.properties[def_prop]; });
+
   }
 
-  function changeColorVar(prop){
-    console.log('change '+prop);
-    // var censustracts = svg.select(".censustracts").selectAll(".censustract")
-    // data.objects.census.geometries.forEach(function(el){
-    //   keymap.push(el.properties[prop])
-    //   colorMap.set(el.properties.TRACT , el.properties[prop])
-    // })
-    // quantize.domain(d3.extent(keymap))
-    // censustracts.attr("class", function(d){
-    //   return "censustract " + quantize(colorMap.get(d.properties.TRACT))
-    // })
-  }
+  var selectKey={a:["B01001_003E","B01001_027E"],b:["B01001_004E","B01001_028E"],c:["B01001_005E","B01001_029E"],d:["B01001_006E","B01001_030E"],e:["B01001_007E","B01001_031E"],f:["B01001_008E","B01001_032E"],g:["B01001_009E","B01001_033E"],h:["B01001_010E","B01001_034E"],i:["B01001_011E","B01001_035E"],j:["B01001_012E","B01001_036E"],k:["B01001_013E","B01001_037E"],l:["B01001_014E","B01001_038E"],m:["B01001_015E","B01001_039E"],n:["B01001_016E","B01001_040E"],o:["B01001_017E","B01001_041E"],p:["B01001_018E","B01001_042E"],q:["B01001_019E","B01001_043E"],r:["B01001_020E","B01001_044E"],s:["B01001_021E","B01001_045E"],t:["B01001_022E","B01001_046E"],u:["B01001_023E","B01001_047E"],v:["B01001_024E","B01001_048E"],w:["B01001_025E","B01001_049E"],x:["B01001_002E","B01001_026E"]};
 
   d3.select(window).on('resize', resize);
-  d3.select('#select').on('change', changeColorVar.call(null, this.value ));
+  d3.select('#dropdown').on('change', function(){
+    var gender = d3.select('input[name=mf]:checked').node().value
+    return changeColorVar(selectKey[this.value][gender] )
+  });
+  d3.selectAll('input[name=mf]').on('change', function(){
+    var demog = d3.select('#dropdown').node().value
+    return changeColorVar(selectKey[demog][this.value] )
+  });
 
   function resize() {
     // adjust things when the window size changes
