@@ -57,6 +57,8 @@
   var path = d3.geo.path()
       .projection(projection)
 
+  ttInit('body')
+
   mapsvg
       .call(renderTiles, 'highroad') //remove to stop roads rendering
       .call(renderNeighborhoods) //remove to stop neighborhoods rendering
@@ -70,7 +72,7 @@
   })
 
   d3.select('#dropdown').on('change', function(){
-    var gender = d3.select('input[name=mf]:checked').node().value
+    var gender = getCurrentGender()
     return changeDemographic(selectKey[this.value][gender] )
   })
 
@@ -80,6 +82,9 @@
     changeDemographic(selectKey[demog][this.value] )
   })
 
+  function getCurrentGender(){
+      return d3.select('input[name=mf]:checked').node().value
+  }
   function setTitle(newTitle){
     d3.select('#selected-title').text(newTitle)
   }
@@ -135,27 +140,34 @@
         .style("text-anchor", "end")
         .text("Population");
 
+
     svg.selectAll(".bar")
         .data(data)
       .enter().append("rect")
         // .attr("class", "bar")
         .attr('class', function(d){
-          return 'bar ' + quantize(d.val)
+          return 'bar ' + quantize(d.val) + getCurrentGender()
         })
         .attr("x", function(d) { return x(d.category); })
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.val); })
-        .attr("height", function(d) { return barheight - y(d.val); });
+        .attr("height", function(d) { return barheight - y(d.val); })
+        .on("mouseover", function(d){
+          var me = d3.select(this),
+              thisText = d.val;
+          return ttFollow(me, thisText)
+        } )
+        .on("mouseout", ttHide );
 
     svg.append('text')
-      .attr("y", height)
-      .attr("x", 10)
+      .attr("y", 16)
+      .attr("x", 25)
       .attr("class", "tracttitle")
-      .text('980501')
+      .text('Census Tract 980501')
   }
 
   function changeBarChart(tract){
-    var gender = d3.select('input[name=mf]:checked').node().value
+    var gender = getCurrentGender()
     var data = getDemographicCategories(gender,tract)
     var foo = [];
     data.forEach(function(el){
@@ -168,11 +180,13 @@
     var bars = d3.selectAll('.bar')
 
     bars.data(data)
-        .attr('class', function(d){ return 'bar ' + quantize(d.val) })
+        .attr('class', function(d){
+          return 'bar ' + quantize(d.val) + gender
+        })
         .attr("y", function(d) { return y(d.val); })
         .attr("height", function(d) { return barheight - y(d.val); });
     d3.select('.tracttitle')
-      .text(tract)
+      .text('Census Tract ' + tract)
   }
 
   function renderTiles(svg, type) {
@@ -206,7 +220,7 @@
         .selectAll('.neighborhood')
           .data(topojson.feature(sf, sf.objects.SFFind_Neighborhoods).features)
         .enter().append('a')
-          .attr('xlink:href',function(d) { return d.properties.LINK || '#' }) //change property here to change link
+          .attr('xlink:href',function(d) { return '#' || d.properties.LINK }) //change property here to change link
         .append('path')
           .attr('class', 'neighborhood')
           .on('mouseover', function(d) { return setTitle(d.properties.name) })
@@ -228,7 +242,7 @@
           .attr('class', 'censustract')
           .attr('d', path)
           .on('click', function(d){ return changeBarChart(d.id) })
-          .append('svg:title')
+        // .append('svg:title')
     })
   }
 
@@ -242,11 +256,18 @@
     var censustracts = mapsvg.select('.censustracts').selectAll('.censustract')
     censustracts
       .attr('class', function(d){
-        return 'censustract ' + quantize(colorMap.get(d.id))
+        return 'censustract ' + quantize(colorMap.get(d.id)) + getCurrentGender()
       })
-      .on('mouseover', function(d) { return setTitle(colorMap.get(d.id)) })
-      .select('title')
-      .text( function(d) { return colorMap.get(d.id) })
+      .on('mouseover', function(d) {
+        var me = d3.select(this),
+            pop = colorMap.get(d.id),
+            thisText = 'census tract: ' + d.id + '<br> population: '+ pop;
+        ttFollow(me, thisText)
+        return setTitle(pop)
+      })
+      .on("mouseout", ttHide )
+      // .select('title')
+      // .text( function(d) { return colorMap.get(d.id) })
 
   }
 
@@ -255,4 +276,29 @@
 
 function handleClick(cb) {
   d3.select('.' + cb.name).classed('hidden', !cb.checked)
+}
+
+function ttInit(element){
+  d3.select(element).append('div')
+      .attr('id', 'tooltip')
+      .attr('class', 'hidden')
+    .append('span')
+      .attr('class', 'value')
+}
+
+function ttFollow(element, caption, options) {
+  element.on('mousemove', null);
+  element.on('mousemove', function() {
+    var position = d3.mouse(document.body);
+    d3.select('#tooltip')
+      .style('top', ( (position[1] + 30)) + "px")
+      .style('left', ( position[0]) + "px");
+    d3.select('#tooltip .value')
+      .html(caption);
+  });
+  d3.select('#tooltip').classed('hidden', false);
+};
+
+function ttHide() {
+  d3.select('#tooltip').classed('hidden', true);
 }

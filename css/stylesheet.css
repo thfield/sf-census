@@ -43,12 +43,40 @@ svg {
   display: none;
 }
 
-.q0-9 { fill:rgba(247,251,255,0.6); }
-.q1-9 { fill:rgba(222,235,247,0.6); }
-.q2-9 { fill:rgba(198,219,239,0.6); }
-.q3-9 { fill:rgba(158,202,225,0.6); }
-.q4-9 { fill:rgba(107,174,214,0.6); }
-.q5-9 { fill:rgba(66,146,198,0.6); }
-.q6-9 { fill:rgba(33,113,181,0.6); }
-.q7-9 { fill:rgba(8,81,156,0.6); }
-.q8-9 { fill:rgba(8,48,107,0.6); }
+#tooltip {
+  position: absolute;
+  /*width: 200px;*/
+  height: auto;
+  padding: 10px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+}
+
+#tooltip span {
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.q0-90 { fill:rgba(247,251,255,0.6); }
+.q1-90 { fill:rgba(222,235,247,0.6); }
+.q2-90 { fill:rgba(198,219,239,0.6); }
+.q3-90 { fill:rgba(158,202,225,0.6); }
+.q4-90 { fill:rgba(107,174,214,0.6); }
+.q5-90 { fill:rgba(66,146,198,0.6); }
+.q6-90 { fill:rgba(33,113,181,0.6); }
+.q7-90 { fill:rgba(8,81,156,0.6); }
+.q8-90 { fill:rgba(8,48,107,0.6); }
+
+.q0-91 { fill:rgba(247,244,249,0.6) }
+.q1-91 { fill:rgba(231,225,239,0.6) }
+.q2-91 { fill:rgba(212,185,218,0.6) }
+.q3-91 { fill:rgba(201,148,199,0.6) }
+.q4-91 { fill:rgba(223,101,176,0.6) }
+.q5-91 { fill:rgba(231,41,138,0.6) }
+.q6-91 { fill:rgba(206,18,86,0.6) }
+.q7-91 { fill:rgba(152,0,67,0.6) }
+.q8-91 { fill:rgba(103,0,31,0.6) }
