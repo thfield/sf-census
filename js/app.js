@@ -61,7 +61,7 @@
 
   mapsvg
       .call(renderTiles, 'highroad') //remove to stop roads rendering
-      // .call(renderNeighborhoods) //remove to stop neighborhoods rendering
+      .call(renderNeighborhoods) //remove to stop neighborhoods rendering
 
   mapsvg.call(renderCensusTract) //remove to stop neighborhoods rendering
 
@@ -219,7 +219,7 @@
       if (error) return console.error(error)
 
       svg.append('g')
-          .attr('class', 'neighborhoods')
+          .attr('class', 'neighborhoods hidden')
         .selectAll('.neighborhood')
           .data(topojson.feature(sf, sf.objects.SFFind_Neighborhoods).features)
         .enter().append('a')
