@@ -10,6 +10,7 @@ path {
 .chart-container {
   width: 650px;
   height: 650px;
+  /*background-color: #e8e8e8;*/
 }
 .major_road { stroke: #444; }
 .minor_road { stroke: #bbb; }
@@ -31,7 +32,12 @@ svg {
 .censustract:hover {
   fill: rgba(247, 91, 68, 0.5);
 }
-
+.bar:hover {
+  fill: rgba(247, 91, 68, 0.5);
+}
+.bar {
+  stroke: #000;
+}
 .hidden {
   display: none;
 }

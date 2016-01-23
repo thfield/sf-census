@@ -40,7 +40,6 @@
       keymap = []
 
   var quantize = d3.scale.quantize()
-      // .domain([0, .15])
       .range(d3.range(9).map(function(i) { return 'q' + i + '-9' }))
 
   var tiler = d3.geo.tile()
@@ -61,18 +60,20 @@
   mapsvg.call(renderCensusTract) //remove to stop neighborhoods rendering
 
   d3.json('data/age-sex.json', function(data) {
-      censusData = data
-      changeDemographic('B01001_002E')
-      renderBarChart(barsvg)
+    censusData = data
+    changeDemographic('B01001_002E')
+    renderBarChart(barsvg)
   })
 
   d3.select('#dropdown').on('change', function(){
     var gender = d3.select('input[name=mf]:checked').node().value
     return changeDemographic(selectKey[this.value][gender] )
   })
+
   d3.selectAll('input[name=mf]').on('change', function(){
     var demog = d3.select('#dropdown').node().value
-    return changeDemographic(selectKey[demog][this.value] )
+    // changeBarChart(demog)
+    changeDemographic(selectKey[demog][this.value] )
   })
 
   function setTitle(newTitle){
@@ -142,6 +143,11 @@
         .attr("y", function(d) { return y(d.val); })
         .attr("height", function(d) { return barheight - y(d.val); });
 
+    svg.append('text')
+      .attr("y", height)
+      .attr("x", 10)
+      .attr("class", "tracttitle")
+      .text('980501')
   }
 
   function changeBarChart(tract){
@@ -158,8 +164,11 @@
     var bars = d3.selectAll('.bar')
 
     bars.data(data)
+        .attr('class', function(d){ return 'bar ' + quantize(d.val) })
         .attr("y", function(d) { return y(d.val); })
         .attr("height", function(d) { return barheight - y(d.val); });
+    d3.select('.tracttitle')
+      .text(tract)
   }
 
   function renderTiles(svg, type) {
