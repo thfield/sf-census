@@ -42,6 +42,9 @@ svg {
 .hidden {
   display: none;
 }
+.about {
+  font-size: .7em;
+}
 
 #tooltip {
   position: absolute;

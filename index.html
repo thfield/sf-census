@@ -15,10 +15,12 @@
 
   <div id="controls">
     <p>
-      Click on a census tract to see the age distribution for that tract <br>
-      Streets <input type="checkbox" name="highroad" onclick='handleClick(this);' checked> <br>
-      Neighborhoods  <input type="checkbox" name="neighborhoods" onclick='handleClick(this);' checked> <br>
-      Census Tract  <input type="checkbox" name="censustracts" onclick='handleClick(this);' checked> <br>
+      The map shows population density for the selected demographic group. <br>
+      The bar chart shows age distribution within a census tract. <br>
+      Click on a census tract on the map to see the age distribution for that tract <br>
+      <input type="checkbox" name="highroad" onclick='layerHideShow(this);' checked> Streets <br>
+      <!-- <input type="checkbox" name="neighborhoods" onclick='layerHideShow(this);' checked> Neighborhoods <br> -->
+      <input type="checkbox" name="censustracts" onclick='layerHideShow(this);' checked> Census Tracts <br>
     </p>
 
     <p>

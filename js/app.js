@@ -61,7 +61,7 @@
 
   mapsvg
       .call(renderTiles, 'highroad') //remove to stop roads rendering
-      .call(renderNeighborhoods) //remove to stop neighborhoods rendering
+      // .call(renderNeighborhoods) //remove to stop neighborhoods rendering
 
   mapsvg.call(renderCensusTract) //remove to stop neighborhoods rendering
 
@@ -78,9 +78,11 @@
 
   d3.selectAll('input[name=mf]').on('change', function(){
     var demog = d3.select('#dropdown').node().value
-    // changeBarChart(demog)
+    changeBarChart(currentTract)
     changeDemographic(selectKey[demog][this.value] )
   })
+
+  var currentTract = '980501'
 
   function getCurrentGender(){
       return d3.select('input[name=mf]:checked').node().value
@@ -106,7 +108,7 @@
   function renderBarChart(svg){
     svg.append('g').attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    var data = getDemographicCategories(0,'980501')
+    var data = getDemographicCategories(0, currentTract)
     var foo = [];
     data.forEach(function(el){
       foo.push(el.acs)
@@ -187,6 +189,7 @@
         .attr("height", function(d) { return barheight - y(d.val); });
     d3.select('.tracttitle')
       .text('Census Tract ' + tract)
+    currentTract = tract;
   }
 
   function renderTiles(svg, type) {
@@ -274,7 +277,7 @@
 
 })()
 
-function handleClick(cb) {
+function layerHideShow(cb) {
   d3.select('.' + cb.name).classed('hidden', !cb.checked)
 }
 
