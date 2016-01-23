@@ -68,11 +68,11 @@ jsdom.env({
 })
 
 function cb(errors, window){
-	
+
   var el = window.document.querySelector('#map_container')
 
 	var margin = {top: 10, left: 10, bottom: 10, right: 10},
-	    width = 1000,
+	    width = 650,
 	    width = width - margin.left - margin.right,
 	    mapRatio = 1,
 	    height = width * mapRatio,

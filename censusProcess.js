@@ -6,12 +6,16 @@ let female = JSON.parse(fs.readFileSync('raw/female.json', 'utf8'));
 let outputfile = 'data/age-sex.json'
 
 let output = {}
+let extras = ["name","state","county","tract"]
 
 function process(data){
   data.data.forEach(function(el){
     for (let prop in el) {
       output[el.tract] = output[el.tract] || {}
       output[el.tract][prop] = el[prop]
+      extras.forEach(function(extra){
+        delete output[el.tract][extra]
+      })
     }
   })
 }

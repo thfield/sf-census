@@ -7,6 +7,10 @@ path {
   stroke: #000;
 }
 
+.chart-container {
+  width: 650px;
+  height: 650px;
+}
 .major_road { stroke: #444; }
 .minor_road { stroke: #bbb; }
 .highway { stroke: #111; stroke-width: 1.5px; }
@@ -23,6 +27,10 @@ svg {
 .neighborhood:hover {
    fill: rgba(247, 91, 68, 0.5);
  }
+
+.censustract:hover {
+  fill: rgba(247, 91, 68, 0.5);
+}
 
 .hidden {
   display: none;
