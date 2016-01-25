@@ -3,77 +3,91 @@
 
 <head>
   <meta charset="utf-8">
+
   <title>SF Neighborhoods</title>
   <link rel="stylesheet" href="css/stylesheet.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
   <script src="js/d3.min.js" charset="utf-8"></script>
   <script src="js/topojson.js" charset="utf-8"></script>
   <script src="js/d3.geo.tile.v0.min.js"></script>
-  <script src="js/queue.v1.min.js"></script>
+  <!-- <script src="js/queue.v1.min.js"></script> -->
 </head>
 
 <body>
+<div class="container">
+  
+  <div class="row">
+    <form id="controls" class="four columns">
+      <p>
+        The map shows population density for the selected demographic group. <br>
+        The bar chart shows age distribution within a census tract. <br>
+        Click on a census tract on the map to see the age distribution for that tract <br>
+      </p>
 
-  <div id="controls">
-    <p>
-      The map shows population density for the selected demographic group. <br>
-      The bar chart shows age distribution within a census tract. <br>
-      Click on a census tract on the map to see the age distribution for that tract <br>
-      <input type="checkbox" name="highroad" onclick='layerHideShow(this);' checked> Streets <br>
-      <input type="checkbox" name="neighborhoods" onclick='layerHideShow(this);'> Neighborhoods <br>
-      <input type="checkbox" name="censustracts" onclick='layerHideShow(this);' checked> Census Tracts <br>
-    </p>
+      <p>
+        <input type="checkbox" name="highroad" onclick='layerHideShow(this);' checked> Streets <br>
+        <input type="checkbox" name="neighborhoods" onclick='layerHideShow(this);'> Neighborhoods <br>
+        <input type="checkbox" name="censustracts" onclick='layerHideShow(this);' checked> Census Tracts <br>
 
-    <p>
-      <input type="radio" name="mf" value='0' checked>Male</input>
-      <input type="radio" name="mf" value='1'>Female</input>
-      <select name="select" id="dropdown">
-        <option value="a" selected>Under 5 years</option>
-        <option value="b">5 to 9 years</option>
-        <option value="c">10 to 14 years</option>
-        <option value="d">15 to 17 years</option>
-        <option value="e">18 and 19 years</option>
-        <option value="f">20 years</option>
-        <option value="g">21 years</option>
-        <option value="h">22 to 24 years</option>
-        <option value="i">25 to 29 years</option>
-        <option value="j">30 to 34 years</option>
-        <option value="k">35 to 39 years</option>
-        <option value="l">40 to 44 years</option>
-        <option value="m">45 to 49 years</option>
-        <option value="n">50 to 54 years</option>
-        <option value="o">55 to 59 years</option>
-        <option value="p">60 and 61 years</option>
-        <option value="q">62 to 64 years</option>
-        <option value="r">65 and 66 years</option>
-        <option value="s">67 to 69 years</option>
-        <option value="t">70 to 74 years</option>
-        <option value="u">75 to 79 years</option>
-        <option value="v">80 to 84 years</option>
-        <option value="w">85 years and over</option>
-        <option value="x">Total</option>
-        </select>
-    </p>
-    <div id="selected-title">San Francisco</div>
+        <input type="radio" name="mf" value='0' checked>Male</input>
+        <input type="radio" name="mf" value='1'>Female</input>
+        <select name="select" id="dropdown">
+          <option value="a">Under 5 years</option>
+          <option value="b">5 to 9 years</option>
+          <option value="c">10 to 14 years</option>
+          <option value="d">15 to 17 years</option>
+          <option value="e">18 and 19 years</option>
+          <option value="f">20 years</option>
+          <option value="g">21 years</option>
+          <option value="h">22 to 24 years</option>
+          <option value="i">25 to 29 years</option>
+          <option value="j">30 to 34 years</option>
+          <option value="k">35 to 39 years</option>
+          <option value="l">40 to 44 years</option>
+          <option value="m">45 to 49 years</option>
+          <option value="n">50 to 54 years</option>
+          <option value="o">55 to 59 years</option>
+          <option value="p">60 and 61 years</option>
+          <option value="q">62 to 64 years</option>
+          <option value="r">65 and 66 years</option>
+          <option value="s">67 to 69 years</option>
+          <option value="t">70 to 74 years</option>
+          <option value="u">75 to 79 years</option>
+          <option value="v">80 to 84 years</option>
+          <option value="w">85 years and over</option>
+          <option value="x"selected>Total</option>
+          </select>
+      </p>
+      <div id="selected-title">San Francisco</div>
+    </form>
+    <div id="barchart_container" class="eight columns chart-container"> </div>
   </div>
 
-  <div id="map_container" class="chart-container"> </div>
-  <div id="barchart_container" class="chart-container"> </div>
-
-  <script src="js/app.js" charset="utf-8"></script>
-
-  <div class="about">
-    Neighborhoods defined by the mayor's office for http://sffind.info/ <br>
-    Data Provided By: City and County of San Francisco Planning Department <br>
-    Source Link: http://www.sfgov.org <br>
-    License: Open Data Commons Public Domain Dedication and License <br>
-    converted to topojson with http://www.mapshaper.org/ <br>
-    with help from http://bost.ocks.org/mike/map/ <br>
-    and http://bl.ocks.org/mbostock/5798874 <br>
-    osm tiles from http://openstreetmap.us/~migurski/vector-datasource/<br>
-    responsive map from http://eyeseast.github.io/visible-data/2013/08/26/responsive-d3/<br>
-    census data from http://uscensusbureau.github.io/citysdk<br>
+  <div class="row">
+    <div id="map_container" class="twelve columns chart-container"> </div>
   </div>
 
+  <div class="row">
+    <div class="eleven columns about">
+      Neighborhoods defined by the mayor's office for http://sffind.info/ <br>
+      Data Provided By: City and County of San Francisco Planning Department <br>
+      Source Link: http://www.sfgov.org <br>
+      License: Open Data Commons Public Domain Dedication and License <br>
+      converted to topojson with http://www.mapshaper.org/ <br>
+      with help from http://bost.ocks.org/mike/map/ <br>
+      and http://bl.ocks.org/mbostock/5798874 <br>
+      osm tiles from http://openstreetmap.us/~migurski/vector-datasource/<br>
+      responsive map from http://eyeseast.github.io/visible-data/2013/08/26/responsive-d3/<br>
+      census data from http://uscensusbureau.github.io/citysdk<br>
+    </div>
+  </div>
+</div>
+<script src="js/app.js" charset="utf-8"></script>
 </body>
 
 </html>

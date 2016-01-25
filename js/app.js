@@ -9,19 +9,20 @@
       censusData
 
   var margin = {top: 10, left: 10, bottom: 10, right: 10},
-      // width = parseInt(d3.select('#map_container').style('width')),
-      width = 650,
+      width = parseInt(d3.select('#map_container').style('width')),
+      barchartWidth = parseInt(d3.select('#barchart_container').style('width')),
+      // width = 650,
       width = width - margin.left - margin.right,
       mapRatio = 1,
       height = width * mapRatio,
-      barheight = height/2,
+      barchartHeight = 400,
       scaleMultiplier = 300
 
   var x = d3.scale.ordinal()
-      .rangeRoundBands([0, width], .1);
+      .rangeRoundBands([0, barchartWidth], .1);
 
   var y = d3.scale.linear()
-      .range([barheight, 0]);
+      .range([barchartHeight, 0]);
 
   var xAxis = d3.svg.axis()
       .scale(x)
@@ -37,7 +38,7 @@
       .attr('id','map')
 
   var barsvg = d3.select('#barchart_container').append('svg')
-      .attr('height', barheight)
+      .attr('height', barchartHeight)
       .attr('id','barchart')
 
   var colorMap = d3.map(),
@@ -70,12 +71,10 @@
     changeDemographic('B01001_002E')
     renderBarChart(barsvg)
   })
-
   d3.select('#dropdown').on('change', function(){
     var gender = getCurrentGender()
     return changeDemographic(selectKey[this.value][gender] )
   })
-
   d3.selectAll('input[name=mf]').on('change', function(){
     var demog = d3.select('#dropdown').node().value
     changeBarChart(currentTract)
@@ -87,6 +86,7 @@
   function getCurrentGender(){
       return d3.select('input[name=mf]:checked').node().value
   }
+
   function setTitle(newTitle){
     d3.select('#selected-title').text(newTitle)
   }
@@ -109,7 +109,7 @@
     svg.append('g').attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var data = getDemographicCategories(0, currentTract)
-    var foo = [];
+    var foo = []
     data.forEach(function(el){
       foo.push(el.acs)
     })
@@ -121,7 +121,7 @@
     svg.append("g")
         .attr("class", "x axis")
         .attr("transform",  function(d) {
-          return 'translate(0,' + barheight + ')'
+          return 'translate(0,' + barchartHeight + ')'
         })
         .attr('text-anchor', 'start')
         .call(xAxis)
@@ -129,7 +129,7 @@
         .attr("y", 0)
         .attr("x", 9)
         .attr("dy", ".35em")
-        .attr("transform", "rotate(90)")
+        .attr("transform", "rotate(-90)")
         .style("text-anchor", "start");
 
     svg.append("g")
@@ -153,7 +153,7 @@
         .attr("x", function(d) { return x(d.category); })
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.val); })
-        .attr("height", function(d) { return barheight - y(d.val); })
+        .attr("height", function(d) { return barchartHeight - y(d.val); })
         .on("mouseover", function(d){
           var me = d3.select(this),
               thisText = d.val;
@@ -186,7 +186,7 @@
           return 'bar ' + quantize(d.val) + gender
         })
         .attr("y", function(d) { return y(d.val); })
-        .attr("height", function(d) { return barheight - y(d.val); });
+        .attr("height", function(d) { return barchartHeight - y(d.val); });
     d3.select('.tracttitle')
       .text('Census Tract ' + tract)
     currentTract = tract;
