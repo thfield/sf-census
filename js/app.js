@@ -58,6 +58,8 @@
   var path = d3.geo.path()
       .projection(projection)
 
+  var currentTract = '980501'
+
   ttInit('body')
 
   mapsvg
@@ -66,6 +68,7 @@
 
   mapsvg.call(renderCensusTract) //remove to stop neighborhoods rendering
 
+  /* page listeners */
   d3.json('data/age-sex.json', function(data) {
     censusData = data
     changeDemographic('B01001_002E')
@@ -80,8 +83,9 @@
     changeBarChart(currentTract)
     changeDemographic(selectKey[demog][this.value] )
   })
+  d3.select(window).on('resize', resize);
 
-  var currentTract = '980501'
+
 
   function getCurrentGender(){
       return d3.select('input[name=mf]:checked').node().value
@@ -116,7 +120,7 @@
 
     x.domain(categoryTitles);
     y.domain([0, d3.max(data, function(d) { return d.val; } )]);
-    quantize.domain(y.domain())
+    quantize.domain( y.domain() )
 
     svg.append("g")
         .attr("class", "x axis")
@@ -285,19 +289,37 @@
     projection
         .translate([width / 2, height / 2])
         .scale(width*scaleMultiplier);
+    x.rangeRoundBands([0, barchartWidth], .1);
+    xAxis.scale(x)
+    barsvg.select(".x.axis")
+        .call(xAxis)
+    barsvg.selectAll(".x text")
+          .attr("y", 0)
+          .attr("x", 9)
+          .attr("dy", ".35em")
+          .style("text-anchor", "start")
 
     // resize the map container
-    svg
+    mapsvg
         .style('width', width + 'px')
         .style('height', height + 'px');
+    barsvg
+        .style('width', barchartWidth + 'px');
+
+    barsvg.selectAll(".bar")
+      .attr("width", x.rangeBand())
+      .attr("x", function(d) { return x(d.category); })
 
     // resize the map
-    svg.select('.neighborhoods').attr('d', path);
-    svg.selectAll('.neighborhood').attr('d', path);
-    svg.select('.highroad').attr('d', path);
-    svg.selectAll('.minor_road').attr('d', path);
-    svg.selectAll('.major_road').attr('d', path);
-    svg.selectAll('.highway').attr('d', path);
+    mapsvg.select('.neighborhoods').attr('d', path);
+    mapsvg.selectAll('.neighborhood').attr('d', path);
+    mapsvg.select('.highroad').attr('d', path);
+    mapsvg.selectAll('.minor_road').attr('d', path);
+    mapsvg.selectAll('.major_road').attr('d', path);
+    mapsvg.selectAll('.highway').attr('d', path);
+    mapsvg.select('.censustracts').attr('d', path);
+    mapsvg.selectAll('.censustract').attr('d', path);
+
 }
 })()
 
