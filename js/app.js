@@ -274,7 +274,31 @@
 
   }
 
+  function resize() {
+    // adjust things when the window size changes
+    width = parseInt(d3.select('#map_container').style('width'));
+    barchartWidth = parseInt(d3.select('#barchart_container').style('width'));
+    width = width - margin.left - margin.right;
+    height = width * mapRatio;
 
+    // update projection
+    projection
+        .translate([width / 2, height / 2])
+        .scale(width*scaleMultiplier);
+
+    // resize the map container
+    svg
+        .style('width', width + 'px')
+        .style('height', height + 'px');
+
+    // resize the map
+    svg.select('.neighborhoods').attr('d', path);
+    svg.selectAll('.neighborhood').attr('d', path);
+    svg.select('.highroad').attr('d', path);
+    svg.selectAll('.minor_road').attr('d', path);
+    svg.selectAll('.major_road').attr('d', path);
+    svg.selectAll('.highway').attr('d', path);
+}
 })()
 
 function layerHideShow(cb) {
