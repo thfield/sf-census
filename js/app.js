@@ -4,7 +4,7 @@
 
 (function() {
   var selectKey = {a:['B01001_003E','B01001_027E'],b:['B01001_004E','B01001_028E'],c:['B01001_005E','B01001_029E'],d:['B01001_006E','B01001_030E'],e:['B01001_007E','B01001_031E'],f:['B01001_008E','B01001_032E'],g:['B01001_009E','B01001_033E'],h:['B01001_010E','B01001_034E'],i:['B01001_011E','B01001_035E'],j:['B01001_012E','B01001_036E'],k:['B01001_013E','B01001_037E'],l:['B01001_014E','B01001_038E'],m:['B01001_015E','B01001_039E'],n:['B01001_016E','B01001_040E'],o:['B01001_017E','B01001_041E'],p:['B01001_018E','B01001_042E'],q:['B01001_019E','B01001_043E'],r:['B01001_020E','B01001_044E'],s:['B01001_021E','B01001_045E'],t:['B01001_022E','B01001_046E'],u:['B01001_023E','B01001_047E'],v:['B01001_024E','B01001_048E'],w:['B01001_025E','B01001_049E'],x:['B01001_002E','B01001_026E']},
-      categoryDict = {B01001_003E:"Under 5 years",B01001_004E:"5 to 9 years",B01001_005E:"10 to 14 years",B01001_006E:"15 to 17 years",B01001_007E:"18 and 19 years",B01001_008E:"20 years",B01001_009E:"21 years",B01001_010E:"22 to 24 years",B01001_011E:"25 to 29 years",B01001_012E:"30 to 34 years",B01001_013E:"35 to 39 years",B01001_014E:"40 to 44 years",B01001_015E:"45 to 49 years",B01001_016E:"50 to 54 years",B01001_017E:"55 to 59 years",B01001_018E:"60 and 61 years",B01001_019E:"62 to 64 years",B01001_020E:"65 and 66 years",B01001_021E:"67 to 69 years",B01001_022E:"70 to 74 years",B01001_023E:"75 to 79 years",B01001_024E:"80 to 84 years",B01001_025E:"85 years and over",B01001_027E:"Under 5 years",B01001_028E:"5 to 9 years",B01001_029E:"10 to 14 years",B01001_030E:"15 to 17 years",B01001_031E:"18 and 19 years",B01001_032E:"20 years",B01001_033E:"21 years",B01001_034E:"22 to 24 years",B01001_035E:"25 to 29 years",B01001_036E:"30 to 34 years",B01001_037E:"35 to 39 years",B01001_038E:"40 to 44 years",B01001_039E:"45 to 49 years",B01001_040E:"50 to 54 years",B01001_041E:"55 to 59 years",B01001_042E:"60 and 61 years",B01001_043E:"62 to 64 years",B01001_044E:"65 and 66 years",B01001_045E:"67 to 69 years",B01001_046E:"70 to 74 years",B01001_047E:"75 to 79 years",B01001_048E:"80 to 84 years",B01001_049E:"85 years and over"},
+      categoryDict = {B01001_003E: "Under 5 years", B01001_004E: "5 to 9 years", B01001_005E: "10 to 14 years", B01001_006E: "15 to 17 years", B01001_007E: "18 and 19 years", B01001_008E: "20 years", B01001_009E: "21 years", B01001_010E: "22 to 24 years", B01001_011E: "25 to 29 years", B01001_012E: "30 to 34 years", B01001_013E: "35 to 39 years", B01001_014E: "40 to 44 years", B01001_015E: "45 to 49 years", B01001_016E: "50 to 54 years", B01001_017E: "55 to 59 years", B01001_018E: "60 and 61 years", B01001_019E: "62 to 64 years", B01001_020E: "65 and 66 years", B01001_021E: "67 to 69 years", B01001_022E: "70 to 74 years", B01001_023E: "75 to 79 years", B01001_024E: "80 to 84 years", B01001_025E: "85 years and over", B01001_027E: "Under 5 years", B01001_028E: "5 to 9 years", B01001_029E: "10 to 14 years", B01001_030E: "15 to 17 years", B01001_031E: "18 and 19 years", B01001_032E: "20 years", B01001_033E: "21 years", B01001_034E: "22 to 24 years", B01001_035E: "25 to 29 years", B01001_036E: "30 to 34 years", B01001_037E: "35 to 39 years", B01001_038E: "40 to 44 years", B01001_039E: "45 to 49 years", B01001_040E: "50 to 54 years", B01001_041E: "55 to 59 years", B01001_042E: "60 and 61 years", B01001_043E: "62 to 64 years", B01001_044E: "65 and 66 years", B01001_045E: "67 to 69 years", B01001_046E: "70 to 74 years", B01001_047E: "75 to 79 years", B01001_048E: "80 to 84 years", B01001_049E: "85 years and over"},
       categoryTitles = ["Under 5 years","5 to 9 years","10 to 14 years","15 to 17 years","18 and 19 years","20 years","21 years","22 to 24 years","25 to 29 years","30 to 34 years","35 to 39 years","40 to 44 years","45 to 49 years","50 to 54 years","55 to 59 years","60 and 61 years","62 to 64 years","65 and 66 years","67 to 69 years","70 to 74 years","75 to 79 years","80 to 84 years","85 years and over"],
       censusData
 
@@ -68,27 +68,54 @@
 
   mapsvg.call(renderCensusTract) //remove to stop neighborhoods rendering
 
-  /* page listeners */
   d3.json('data/age-sex.json', function(data) {
     censusData = data
     changeDemographic('B01001_002E')
     renderBarChart(barsvg)
   })
+
+  /* page listeners */
   d3.select('#dropdown').on('change', function(){
-    var gender = getCurrentGender()
-    return changeDemographic(selectKey[this.value][gender] )
+    return dispatcher.changeDemo()
   })
   d3.selectAll('input[name=mf]').on('change', function(){
-    var demog = d3.select('#dropdown').node().value
-    changeBarChart(currentTract)
-    changeDemographic(selectKey[demog][this.value] )
+    return dispatcher.changeGender()
   })
   d3.select(window).on('resize', resize);
 
+  var dispatcher = d3.dispatch('changeTract', 'changeGender', 'changeDemo')
+  dispatcher.on('changeTract', function(tract){
+    currentTract = tract
+    changeBarChart(tract)
+  })
+  dispatcher.on('changeGender', function(){
+    var demog = d3.select('#dropdown').node().value,
+        gender = getCurrentGender()
+    changeBarChart(currentTract)
+    changeDemographic(selectKey[demog][gender] )
+  })
+  dispatcher.on('changeDemo', function(inputDemog){
+    if (inputDemog) {
+      setActiveDropdown(inputDemog)
+      return changeDemographic(inputDemog)
+    }
+    var demog = d3.select('#dropdown').node().value,
+        gender = getCurrentGender()
 
+    return changeDemographic(selectKey[demog][gender] )
+  })
 
   function getCurrentGender(){
       return d3.select('input[name=mf]:checked').node().value
+  }
+
+  function setActiveDropdown(demog){
+    var title = categoryDict[demog]
+    var selList = document.getElementById('dropdown');
+    for (var i = 0; i < selList.options.length; i++) {
+     var tmpOptionText = selList.options[i].text;
+     if(tmpOptionText == title) selList.selectedIndex = i;
+    }
   }
 
   function setTitle(newTitle){
@@ -100,7 +127,7 @@
     for (var demog in selectKey){
       var acs = selectKey[demog][gender],
           val = censusData[tract][acs],
-          category = categoryDict[acs]
+          category = categoryDict[acs]//[0]
 
       if ( !( (acs == 'B01001_002E') || (acs == 'B01001_026E') ) ){
         result.push({ acs:acs, val:+val, category:category })
@@ -158,6 +185,9 @@
         .attr("width", x.rangeBand())
         .attr("y", function(d) { return y(d.val); })
         .attr("height", function(d) { return barchartHeight - y(d.val); })
+        .on('click', function(d){
+          return dispatcher.changeDemo(d.acs)
+        })
         .on("mouseover", function(d){
           var me = d3.select(this),
               thisText = d.val;
@@ -193,7 +223,6 @@
         .attr("height", function(d) { return barchartHeight - y(d.val); });
     d3.select('.tracttitle')
       .text('Census Tract ' + tract)
-    currentTract = tract;
   }
 
   function renderTiles(svg, type) {
@@ -248,8 +277,16 @@
         .enter().append('path')
           .attr('class', 'censustract')
           .attr('d', path)
-          .on('click', function(d){ return changeBarChart(d.id) })
-        // .append('svg:title')
+          // .on('click', function(d){ return changeBarChart(d.id) })
+          .on('click', function(d){ return dispatcher.changeTract(d.id) })
+          .on('mouseover', function(d) {
+            var me = d3.select(this),
+                pop = colorMap.get(d.id),
+                thisText = 'census tract: ' + d.id + '<br> population: '+ pop;
+            ttFollow(me, thisText)
+            return setTitle(pop)
+          })
+          .on("mouseout", ttHide )
     })
   }
 
@@ -265,17 +302,6 @@
       .attr('class', function(d){
         return 'censustract ' + quantize(colorMap.get(d.id)) + getCurrentGender()
       })
-      .on('mouseover', function(d) {
-        var me = d3.select(this),
-            pop = colorMap.get(d.id),
-            thisText = 'census tract: ' + d.id + '<br> population: '+ pop;
-        ttFollow(me, thisText)
-        return setTitle(pop)
-      })
-      .on("mouseout", ttHide )
-      // .select('title')
-      // .text( function(d) { return colorMap.get(d.id) })
-
   }
 
   function resize() {
