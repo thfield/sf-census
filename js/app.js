@@ -58,7 +58,7 @@
   var path = d3.geo.path()
       .projection(projection)
 
-  var currentTract = '980501'
+  var currentTract = 'citywide'
 
   ttInit('body')
 
@@ -82,6 +82,9 @@
     return dispatcher.changeGender()
   })
   d3.select(window).on('resize', resize);
+  d3.select("#citywide").on('click', function(){
+    dispatcher.changeTract('citywide')
+  });
 
   var dispatcher = d3.dispatch('changeTract', 'changeGender', 'changeDemo')
   dispatcher.on('changeTract', function(tract){
@@ -199,7 +202,7 @@
       .attr("y", 16)
       .attr("x", 25)
       .attr("class", "tracttitle")
-      .text('Census Tract 980501')
+      .text('Census Tract '+ currentTract )
   }
 
   function changeBarChart(tract){
@@ -293,6 +296,7 @@
   function changeDemographic(demog){
     keymap.length = 0
     for (var tract in censusData) {
+      if( tract == 'citywide') {continue}
       colorMap.set(tract, +censusData[tract][demog])
       keymap.push(+censusData[tract][demog])
     }
