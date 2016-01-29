@@ -3,8 +3,8 @@
 //http://bl.ocks.org/mbostock/5872848
 
 (function() {
-  var selectKey = {a:['B01001_003E','B01001_027E'],b:['B01001_004E','B01001_028E'],c:['B01001_005E','B01001_029E'],d:['B01001_006E','B01001_030E'],e:['B01001_007E','B01001_031E'],f:['B01001_008E','B01001_032E'],g:['B01001_009E','B01001_033E'],h:['B01001_010E','B01001_034E'],i:['B01001_011E','B01001_035E'],j:['B01001_012E','B01001_036E'],k:['B01001_013E','B01001_037E'],l:['B01001_014E','B01001_038E'],m:['B01001_015E','B01001_039E'],n:['B01001_016E','B01001_040E'],o:['B01001_017E','B01001_041E'],p:['B01001_018E','B01001_042E'],q:['B01001_019E','B01001_043E'],r:['B01001_020E','B01001_044E'],s:['B01001_021E','B01001_045E'],t:['B01001_022E','B01001_046E'],u:['B01001_023E','B01001_047E'],v:['B01001_024E','B01001_048E'],w:['B01001_025E','B01001_049E'],x:['B01001_002E','B01001_026E']},
-      categoryDict = {B01001_003E: "Under 5 years", B01001_004E: "5 to 9 years", B01001_005E: "10 to 14 years", B01001_006E: "15 to 17 years", B01001_007E: "18 and 19 years", B01001_008E: "20 years", B01001_009E: "21 years", B01001_010E: "22 to 24 years", B01001_011E: "25 to 29 years", B01001_012E: "30 to 34 years", B01001_013E: "35 to 39 years", B01001_014E: "40 to 44 years", B01001_015E: "45 to 49 years", B01001_016E: "50 to 54 years", B01001_017E: "55 to 59 years", B01001_018E: "60 and 61 years", B01001_019E: "62 to 64 years", B01001_020E: "65 and 66 years", B01001_021E: "67 to 69 years", B01001_022E: "70 to 74 years", B01001_023E: "75 to 79 years", B01001_024E: "80 to 84 years", B01001_025E: "85 years and over", B01001_027E: "Under 5 years", B01001_028E: "5 to 9 years", B01001_029E: "10 to 14 years", B01001_030E: "15 to 17 years", B01001_031E: "18 and 19 years", B01001_032E: "20 years", B01001_033E: "21 years", B01001_034E: "22 to 24 years", B01001_035E: "25 to 29 years", B01001_036E: "30 to 34 years", B01001_037E: "35 to 39 years", B01001_038E: "40 to 44 years", B01001_039E: "45 to 49 years", B01001_040E: "50 to 54 years", B01001_041E: "55 to 59 years", B01001_042E: "60 and 61 years", B01001_043E: "62 to 64 years", B01001_044E: "65 and 66 years", B01001_045E: "67 to 69 years", B01001_046E: "70 to 74 years", B01001_047E: "75 to 79 years", B01001_048E: "80 to 84 years", B01001_049E: "85 years and over"},
+  var selectKey={a:["B01001_003E","B01001_027E","a"],b:["B01001_004E","B01001_028E","b"],c:["B01001_005E","B01001_029E","c"],d:["B01001_006E","B01001_030E","d"],e:["B01001_007E","B01001_031E","e"],f:["B01001_008E","B01001_032E","f"],g:["B01001_009E","B01001_033E","g"],h:["B01001_010E","B01001_034E","h"],i:["B01001_011E","B01001_035E","i"],j:["B01001_012E","B01001_036E","j"],k:["B01001_013E","B01001_037E","k"],l:["B01001_014E","B01001_038E","l"],m:["B01001_015E","B01001_039E","m"],n:["B01001_016E","B01001_040E","n"],o:["B01001_017E","B01001_041E","o"],p:["B01001_018E","B01001_042E","p"],q:["B01001_019E","B01001_043E","q"],r:["B01001_020E","B01001_044E","r"],s:["B01001_021E","B01001_045E","s"],t:["B01001_022E","B01001_046E","t"],u:["B01001_023E","B01001_047E","u"],v:["B01001_024E","B01001_048E","v"],w:["B01001_025E","B01001_049E","w"],x:["B01001_002E","B01001_026E","x"]},
+      categoryDict={B01001_003E:"Under 5 years",B01001_004E:"5 to 9 years",B01001_005E:"10 to 14 years",B01001_006E:"15 to 17 years",B01001_007E:"18 and 19 years",B01001_008E:"20 years",B01001_009E:"21 years",B01001_010E:"22 to 24 years",B01001_011E:"25 to 29 years",B01001_012E:"30 to 34 years",B01001_013E:"35 to 39 years",B01001_014E:"40 to 44 years",B01001_015E:"45 to 49 years",B01001_016E:"50 to 54 years",B01001_017E:"55 to 59 years",B01001_018E:"60 and 61 years",B01001_019E:"62 to 64 years",B01001_020E:"65 and 66 years",B01001_021E:"67 to 69 years",B01001_022E:"70 to 74 years",B01001_023E:"75 to 79 years",B01001_024E:"80 to 84 years",B01001_025E:"85 years and over",B01001_027E:"Under 5 years",B01001_028E:"5 to 9 years",B01001_029E:"10 to 14 years",B01001_030E:"15 to 17 years",B01001_031E:"18 and 19 years",B01001_032E:"20 years",B01001_033E:"21 years",B01001_034E:"22 to 24 years",B01001_035E:"25 to 29 years",B01001_036E:"30 to 34 years",B01001_037E:"35 to 39 years",B01001_038E:"40 to 44 years",B01001_039E:"45 to 49 years",B01001_040E:"50 to 54 years",B01001_041E:"55 to 59 years",B01001_042E:"60 and 61 years",B01001_043E:"62 to 64 years",B01001_044E:"65 and 66 years",B01001_045E:"67 to 69 years",B01001_046E:"70 to 74 years",B01001_047E:"75 to 79 years",B01001_048E:"80 to 84 years",B01001_049E:"85 years and over",a:"Under 5 years",b:"5 to 9 years",c:"10 to 14 years",d:"15 to 17 years",e:"18 and 19 years",f:"20 years",g:"21 years",h:"22 to 24 years",i:"25 to 29 years",j:"30 to 34 years",k:"35 to 39 years",l:"40 to 44 years",m:"45 to 49 years",n:"50 to 54 years",o:"55 to 59 years",p:"60 and 61 years",q:"62 to 64 years",r:"65 and 66 years",s:"67 to 69 years",t:"70 to 74 years",u:"75 to 79 years",v:"80 to 84 years",w:"85 years and over"},
       categoryTitles = ["Under 5 years","5 to 9 years","10 to 14 years","15 to 17 years","18 and 19 years","20 years","21 years","22 to 24 years","25 to 29 years","30 to 34 years","35 to 39 years","40 to 44 years","45 to 49 years","50 to 54 years","55 to 59 years","60 and 61 years","62 to 64 years","65 and 66 years","67 to 69 years","70 to 74 years","75 to 79 years","80 to 84 years","85 years and over"],
       censusData
 
@@ -15,7 +15,7 @@
       width = width - margin.left - margin.right,
       mapRatio = 1,
       height = width * mapRatio,
-      barchartHeight = 400,
+      barchartHeight = (width)/3,
       scaleMultiplier = 300
 
   var x = d3.scale.ordinal()
@@ -69,6 +69,11 @@
   mapsvg.call(renderCensusTract) //remove to stop neighborhoods rendering
 
   d3.json('data/age-sex.json', function(data) {
+    for (var letter in selectKey){
+      for (var tract in data){
+        data[tract][letter] = +data[tract][selectKey[letter][0]] + +data[tract][selectKey[letter][1]]
+      }
+    }
     censusData = data
     changeDemographic('B01001_002E')
     renderBarChart(barsvg)
@@ -95,6 +100,7 @@
     var demog = d3.select('#dropdown').node().value,
         gender = getCurrentGender()
     changeBarChart(currentTract)
+
     changeDemographic(selectKey[demog][gender] )
   })
   dispatcher.on('changeDemo', function(inputDemog){
@@ -132,7 +138,7 @@
           val = censusData[tract][acs],
           category = categoryDict[acs]//[0]
 
-      if ( !( (acs == 'B01001_002E') || (acs == 'B01001_026E') ) ){
+      if ( !( (acs == 'B01001_002E') || (acs == 'B01001_026E') || (acs == 'x') ) ){
         result.push({ acs:acs, val:+val, category:category })
       }
     }
@@ -141,12 +147,7 @@
 
   function renderBarChart(svg){
     svg.append('g').attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
     var data = getDemographicCategories(0, currentTract)
-    var foo = []
-    data.forEach(function(el){
-      foo.push(el.acs)
-    })
 
     x.domain(categoryTitles);
     y.domain([0, d3.max(data, function(d) { return d.val; } )]);
@@ -175,7 +176,6 @@
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .text("Population");
-
 
     svg.selectAll(".bar")
         .data(data)
@@ -207,22 +207,21 @@
 
   function changeBarChart(tract){
     var gender = getCurrentGender()
-    var data = getDemographicCategories(gender,tract)
-    var foo = [];
-    data.forEach(function(el){
-      foo.push(el.acs)
-    })
-
+    var scopedata = getDemographicCategories(gender,tract)
+    // var foo = [];
+    // data.forEach(function(el){
+    //   foo.push(el.acs)
+    // })
     x.domain(categoryTitles);
-    y.domain([0, d3.max(data, function(d) { return d.val; } )]);
+    y.domain([0, d3.max(scopedata, function(d) { return d.val; } )]);
+    // debugger;
     quantize.domain(y.domain())
     var bars = d3.selectAll('.bar')
-
-    bars.data(data)
+    bars.data(scopedata)
         .attr('class', function(d){
           return 'bar ' + quantize(d.val) + gender
         })
-        .attr("y", function(d) { return y(d.val); })
+        .attr("y", function(d) { return y(d.val)} )
         .attr("height", function(d) { return barchartHeight - y(d.val); });
     d3.select('.tracttitle')
       .text('Census Tract ' + tract)
@@ -280,7 +279,6 @@
         .enter().append('path')
           .attr('class', 'censustract')
           .attr('d', path)
-          // .on('click', function(d){ return changeBarChart(d.id) })
           .on('click', function(d){ return dispatcher.changeTract(d.id) })
           .on('mouseover', function(d) {
             var me = d3.select(this),
@@ -306,6 +304,7 @@
       .attr('class', function(d){
         return 'censustract ' + quantize(colorMap.get(d.id)) + getCurrentGender()
       })
+      // debugger;
   }
 
   function resize() {

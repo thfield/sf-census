@@ -38,7 +38,7 @@
 
 /* structure */
   .chart-container {
-    width: 650px;
+    /*width: 650px;*/
     /*height: 650px;*/
     /*background-color: #e8e8e8;*/
     display: inline-block;
@@ -104,4 +104,16 @@
   .q6-91 { fill:rgba(206,18,86,0.6) }
   .q7-91 { fill:rgba(152,0,67,0.6) }
   .q8-91 { fill:rgba(103,0,31,0.6) }
-/* colors */
+
+
+  .q0-92 { fill:rgba(247,252,245,0.6) }
+  .q1-92 { fill:rgba(229,245,224,0.6) }
+  .q2-92 { fill:rgba(199,233,192,0.6) }
+  .q3-92 { fill:rgba(161,217,155,0.6) }
+  .q4-92 { fill:rgba(116,196,118,0.6) }
+  .q5-92 { fill:rgba(65,171,93,0.6) }
+  .q6-92 { fill:rgba(35,139,69,0.6) }
+  .q7-92 { fill:rgba(0,109,44,0.6) }
+  .q8-92 { fill:rgba(0,68,27,0.6) }
+
+  /* colors */
