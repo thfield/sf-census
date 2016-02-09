@@ -1,6 +1,6 @@
 var fs = require('fs');
-var apiKey = JSON.parse(fs.readFileSync('raw/census-api-key.json', 'utf8')).apikey;
-// file 'raw/census-api-key.json' looks like {"apikey":"string-of-numbers-and-digits"}
+var apiKey = JSON.parse(fs.readFileSync('raw/api-tokens.json', 'utf8')).apikey;
+// file 'raw/api-tokens.json' looks like {"apikey":"string-of-numbers-and-digits"}
 
 var census = require('citysdk')(apiKey);
 //https://github.com/chadhuber/citysdk-node
