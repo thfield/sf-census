@@ -1,7 +1,7 @@
 # sf-map
-http://thfield.github.io/sf-map
+http://thfield.github.io/sf-census
 
-draws a map of san francisco with neighborhoods outlined and named.
+draws a map of san francisco with census tract population by cohort
 
 Data Provided By: City and County of San Francisco Planning Department
 Source Link: http://www.sfgov.org
