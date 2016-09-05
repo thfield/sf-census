@@ -1,3 +1,2 @@
-scripts/raw/*
-node_modules/*
-dist/*
+scripts/raw
+node_modules
